@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="01.Content">
+      <UniqueIdentifier>{bf209d54-ec63-4bc1-a7cd-67848c210150}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Object">
+      <UniqueIdentifier>{8242c5cb-7a7f-4c77-aeb0-2a227ea6fb51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ConsoleHelper.cpp">
+      <Filter>01.Content</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="ConsoleHelper.h">
+      <Filter>01.Content</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
