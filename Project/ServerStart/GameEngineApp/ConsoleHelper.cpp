@@ -3,60 +3,69 @@
 #include <iostream>
 
 GEVector ConsoleHelper::m_Size;
+int ConsoleHelper::m_LineSize;
 
-void ConsoleHelper::Init(const GEVector& _Size, int _LineSize, char _Line)
+GEVector ConsoleHelper::GetCenter()
 {
+	return {m_Size.CenterX()+m_LineSize,m_Size.CenterY() + m_LineSize };
+}
+
+void ConsoleHelper::Init(const GEVector& _Size, int _LineSize, wchar_t _Line)
+{
+	setlocale(LC_ALL, "KOR");
+
+	CONSOLE_CURSOR_INFO cursorInfo = { 0, };
+	cursorInfo.dwSize = 1;
+	cursorInfo.bVisible = FALSE;
+	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
+
+	m_Size = _Size;
+	m_LineSize = _LineSize;
+
 	//À­ÂÊ º®
-	for (int i = 0; i < _Size.ix() + _LineSize * 2; ++i)
+	for (int y = 0; y < _LineSize; ++y)
 	{
-		for (int j = 0; j < _LineSize; ++j)
+		for (int x = 0; x < _Size.ix() + _LineSize * 2; ++x)
 		{
-			MoveConsolePrint({ i,j }, _Line);
+			ConsolePosPrint({ x,y }, _Line);
+			ConsolePosPrint({ x,y + _Size.ix() + _LineSize }, _Line);
 		}
 	}
 
-
-	for (int i = 0; i < _LineSize; ++i)
+	for (int x = 0; x < _LineSize; ++x)
 	{
-		for (int j = 0; j < _Size.iy() + _LineSize * 2; ++j)
+		for (int y = 0; y < _Size.iy() + _LineSize * 2; ++y)
 		{
-			MoveConsolePrint({ i + _Size.iy() + _LineSize,j }, _Line);
-		}
-	}
-
-
-	//¿ÞÂÊ
-	for (int j = 0; j < _LineSize; ++j)
-	{
-		for (int i = 0; i < _Size.iy() + _LineSize * 2; ++i)
-		{
-			MoveConsolePrint({ j ,i }, _Line);
-		}
-	}
-
-	for (int i = 0; i < _Size.ix() + _LineSize * 2; ++i)
-	{
-		for (int j = 0; j < _LineSize; ++j)
-		{
-			MoveConsolePrint({ i,j + _Size.ix() + _LineSize }, _Line);
+			ConsolePosPrint({ x,y }, _Line);
+			ConsolePosPrint({ x + _Size.iy() + _LineSize,y  }, _Line);
 		}
 	}
 }
 
-void ConsoleHelper::MoveConsolePos(const GEVector& _vPos)
+void ConsoleHelper::ConsolePosMove(const GEVector& vPos)
 {
 	COORD Cur;
-	Cur.X = _vPos.ix();
-	Cur.Y = _vPos.iy();
+	Cur.X = vPos.ix()*2;
+	Cur.Y = vPos.iy();
 
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 }
 
-void ConsoleHelper::MoveConsolePrint(const GEVector& vPos, char _ch)
+void ConsoleHelper::ConsolePosPrint(const GEVector& vPos,const wchar_t* str)
 {
-	MoveConsolePos(vPos);
+	ConsolePosMove(vPos);
 
-	char Arr[2] = { _ch, };
+	wprintf_s(str);
+}
 
-	printf_s(Arr);
+void ConsoleHelper::ConsolePosPrint(const GEVector& vPos, wchar_t str)
+{
+	wchar_t Arr[2] = { str, };
+
+	ConsolePosPrint(vPos, Arr);
+}
+
+void ConsoleHelper::ConsolePosClear(const GEVector& vPos)
+{
+	ConsolePosPrint(vPos, L"  ");
 }

@@ -20,7 +20,9 @@ public:
 	{
 
 	}
-	GEVector(const GEVector& _Other) = delete;
+	GEVector(const GEVector& _Other)	: x(_Other.x), y(_Other.y), z(_Other.z), w(_Other.w)
+	{
+	}
 
 public:
 	float x; 
@@ -50,9 +52,31 @@ public:
 		return static_cast<int>(w);
 	}
 
+	int CenterX() const
+	{
+		return ix() / 2;
+	}
+
+	int CenterY() const
+	{
+		return iy() / 2;
+	}
+
+	int CenterZ() const
+	{
+		return iz() / 2;
+	}
+
+	int CenterW() const
+	{
+		return iw() / 2;
+	}
+
+
 	GEVector& operator=(const GEVector& _Other)
 	{
 		memcpy_s(this, sizeof(GEVector), &_Other, sizeof(GEVector));
+		return *this;
 	}
 };
 
