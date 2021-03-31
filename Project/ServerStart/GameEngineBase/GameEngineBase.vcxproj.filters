@@ -4,15 +4,69 @@
     <Filter Include="01.Math">
       <UniqueIdentifier>{15480a86-a5c5-43cc-9022-9ae1574b05ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.String">
+      <UniqueIdentifier>{41544a71-dd6c-4bad-8ee9-0823d6eb0980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.IO">
+      <UniqueIdentifier>{59a2c7f8-3b5b-4f10-b4c4-26c9a3062d9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Input">
+      <UniqueIdentifier>{81db01d5-e229-43dd-a562-f6f9f8c4088c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Thread">
+      <UniqueIdentifier>{d97d41a4-c567-40f9-8076-c7cfd377b3d9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GEMath.h">
       <Filter>01.Math</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineString.h">
+      <Filter>02.String</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInput.h">
+      <Filter>04.Input</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTime.h">
+      <Filter>01.Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnginePath.h">
+      <Filter>03.IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFile.h">
+      <Filter>03.IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDirectory.h">
+      <Filter>03.IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineThread.h">
+      <Filter>05.Thread</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GEMath.cpp">
       <Filter>01.Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineString.cpp">
+      <Filter>02.String</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp">
+      <Filter>04.Input</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTime.cpp">
+      <Filter>01.Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnginePath.cpp">
+      <Filter>03.IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFile.cpp">
+      <Filter>03.IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDirectory.cpp">
+      <Filter>03.IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineThread.cpp">
+      <Filter>05.Thread</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

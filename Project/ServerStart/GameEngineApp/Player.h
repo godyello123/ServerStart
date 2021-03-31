@@ -1,41 +1,44 @@
 #pragma once
 #include <GEMath.h>
+#include <Actor.h>
 
 enum class PLAYERINPUT
 {
-	SLEFE = 'A',
-	SRIGHT = 'D',
-	SUP = 'W',
-	SDOWN = 'S',
-	LLEFE = 'a',
-	LRIGHT = 'd',
-	LUP = 'w',
-	LDOWN = 's'
+	SLEFT = 'a',
+	BLEFT = 'A',
+	SRIGHT = 'd',
+	BRIGHT = 'D',
+	SDOWN = 's',
+	BDOWN = 'S',
+	SUP = 'w',
+	BUP = 'W',
 };
 
-class Player
+// Ό³Έν : 
+class Player : public Actor
 {
-private: //Static variable
-	wchar_t m_Char;
-	GEVector m_Pos;
+private:	// static Var
+public:		// static Func
+private:	// Member Var
+	wchar_t m_CharactorCh;
+	float m_MoveTime;
+	float m_FireTime;
 
-public://Static Function
-private: //Member variable
-
-public://Contructer , Destructer
-	Player() = delete;
-	Player(const GEVector& vPos, wchar_t _char);
+public:	// Constructer Destructer
+	Player();
+	~Player();
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) = delete;
-	~Player();
 
-public:
+public:	// operator
 	Player& operator=(const Player& _Other) = delete;
-	Player& operator=(Player& _Other) = delete;
+	Player& operator=(Player&& _Other) = delete;
 
-public://Member Function
-	void Render();
+public: // member Function
+	void Update() override;
+
+private:
+	void InputCheck();
 
 
 };
-

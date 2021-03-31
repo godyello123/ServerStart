@@ -4,21 +4,26 @@
 class ConsoleHelper
 {
 private:
-	static GEVector m_Size;//돌아 다닐수 있는 크기
+	static GEVector m_Size;
 	static int m_LineSize;
 
 public:
+	static GEVector GetSize();
 	static GEVector GetCenter();
+	static bool IsWall(GEVector _Pos);
 
 public:
-	static void Init(const GEVector& _vSize, int _isize, wchar_t _ch);
-	static void ConsolePosMove(const GEVector& vPos);
-	static void ConsolePosPrint(const GEVector& vPos,const wchar_t* str);
-	static void ConsolePosPrint(const GEVector& vPos, wchar_t str);
-	static void ConsolePosClear(const GEVector& vPos);
-	
+	static void Init(const GEVector& _Size, int _LineSize, wchar_t _Line);
+
+	// 함수를 만들때는
+	// 작은 기능들의 함수로 만들고
+	// 그것들을 혼합해서 큰함수를 만들어
+	static void ConsolePosMove(const GEVector& _Pos);
+	static void ConsolePosPrint(const GEVector& _Pos, wchar_t _Text, bool _IsWallCheck = true);
+	static void ConsolePosPrint(const GEVector& _Pos, const wchar_t* _Text, bool _IsWallCheck = true);
+	static void ConsolePosClear(const GEVector& _Pos);
+
 private:
 	ConsoleHelper();
 	virtual ~ConsoleHelper() = 0;
 };
-

@@ -1,6 +1,10 @@
-#pragma once
+ #pragma once
 
 #include <memory.h>
+
+/*
+$id$
+*/
 
 class GEMath
 {
@@ -20,9 +24,16 @@ public:
 	{
 
 	}
-	GEVector(const GEVector& _Other)	: x(_Other.x), y(_Other.y), z(_Other.z), w(_Other.w)
+	GEVector(const GEVector& _Other) : x(_Other.x), y(_Other.y), z(_Other.z), w(_Other.w)
 	{
+
 	}
+
+public:
+	static const GEVector LEFT;
+	static const GEVector RIGHT;
+	static const GEVector UP;
+	static const GEVector DOWN;
 
 public:
 	float x; 
@@ -52,31 +63,38 @@ public:
 		return static_cast<int>(w);
 	}
 
-	int CenterX() const
+	inline int hix() const
 	{
+		// return (int)(x);
 		return ix() / 2;
 	}
 
-	int CenterY() const
+	inline int hiy() const
 	{
 		return iy() / 2;
 	}
-
-	int CenterZ() const
-	{
-		return iz() / 2;
-	}
-
-	int CenterW() const
-	{
-		return iw() / 2;
-	}
-
 
 	GEVector& operator=(const GEVector& _Other)
 	{
 		memcpy_s(this, sizeof(GEVector), &_Other, sizeof(GEVector));
 		return *this;
+	}
+
+	GEVector& operator +=(const GEVector& _Other)
+	{
+		x += _Other.x;
+		y += _Other.y;
+		z += _Other.z;
+		return *this;
+	}
+
+	GEVector operator +(const GEVector& _other)
+	{
+		GEVector vec;
+		vec.x = x + _other.x;
+		vec.y = x + _other.x;
+		vec.z = x + _other.x;
+		return vec;
 	}
 };
 

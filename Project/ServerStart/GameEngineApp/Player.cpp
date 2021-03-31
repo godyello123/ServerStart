@@ -1,66 +1,100 @@
-#include <conio.h>
 #include "Player.h"
 #include "ConsoleHelper.h"
-#include "GameEngineInput.h"
-//Constructer Destructer=====================================================================
-//Player::Player()
+#include <conio.h>
+#include <GameEngineInput.h>
+#include <GameEngineTime.h>
+
+
 //{
+//GameEngineFile NewFile(L"TestData.txt");
+////if (false == NewFile.IsExist())
+////{
+//NewFile.FileOpen(L"wb");
+
+//std::list<int> Vector;
+//for (size_t i = 0; i < 10; i++)
+//{
+//	Vector.push_back(i * 10);
 //}
 
-Player::Player(const GEVector& vPos, wchar_t _char)	:m_Pos(vPos),m_Char(_char)
+//NewFile << (Vector);
+
+//int Value = 200;
+//NewFile << Value;
+//EngineString Str = L"AAAA BBB CCD DDERFERWER";
+//NewFile << Str;
+
+//int a = 0;
+////}
+
+//}
+
+// Constructer Destructer ----------------------------------------------------
+// Player::Player() {}
+
+Player::Player() : m_CharactorCh(L'■'), m_MoveTime(0.2f), m_FireTime(0.5f)
 {
-	ConsoleHelper::ConsolePosPrint(vPos, _char);
-	
+	if (false == GameEngineInput::IsKey(L"LeftMove"))
+	{
+		GameEngineInput::GetInst().CreateKey(L"LeftMove", 'a');
+		GameEngineInput::GetInst().CreateKey(L"RightMove", 'd');
+		GameEngineInput::GetInst().CreateKey(L"UpMove", 'w');
+		GameEngineInput::GetInst().CreateKey(L"DownMove", 's');
+	}
 }
 
 Player::~Player()
 {
+
 }
+// Player::Player(const Player& _Other) {}
+// Player::Player(Player&& _Other) {}
+
+// operator -----------------------------------------------------------------
+// Player& Player::operator=(const Player& _Other) {}
+// Player& Player::operator=(Player&& _Other) {}
 
 
-/* 
-* Player::Player(const Player& _Other) {}
-* Bsee::Player(Player&& _Other) {}
-*/
+// member Function -----------------------------------------------------------
 
-/*operator ==================================================================================
-*Player& Player::operator(const Player& _Other) {}
-*Player& Player::operator(Player&& _Other) {}
-*/
-
-//Member Function============================================================================
-void Player::Render()
+void Player::InputCheck()
 {
-	GEVector vOldPos = m_Pos;
+	GEVector OldPos = GetPos();
 
-	int iDir = _getch();
-
-	PLAYERINPUT eDir = (PLAYERINPUT)iDir;
-
-	switch (eDir)
+	if (GameEngineInput::IsPush(L"LeftMove"))
 	{
-	case PLAYERINPUT::SLEFE:
-	case PLAYERINPUT::LLEFE:
-		m_Pos.x -= 1;
-		break;
-	case PLAYERINPUT::SRIGHT:
-	case PLAYERINPUT::LRIGHT:
-		m_Pos.x += 1;
-		break;
-	case PLAYERINPUT::SUP:
-	case PLAYERINPUT::LUP:
-		m_Pos.y -= 1;
-		break;
-	case PLAYERINPUT::SDOWN:
-	case PLAYERINPUT::LDOWN:
-		m_Pos.y += 1;
-		break;
-	default:
-		break;
+		SetMove(GEVector::LEFT);
 	}
 
-	ConsoleHelper::ConsolePosClear(vOldPos);
+	if (GameEngineInput::IsPush(L"RightMove"))
+	{
+		SetMove(GEVector::RIGHT);
+	}
 
-	ConsoleHelper::ConsolePosPrint(m_Pos, m_Char);
+	if (GameEngineInput::IsPush(L"UpMove"))
+	{
+		SetMove(GEVector::UP);
+	}
 
+	if (GameEngineInput::IsPush(L"DownMove"))
+	{
+		SetMove(GEVector::DOWN);
+	}
+
+	//// Value 누른 키의 코드
+	ConsoleHelper::ConsolePosClear(OldPos);
+
+	ConsoleHelper::ConsolePosPrint(GetPos(), m_CharactorCh);
+
+}
+
+void Player::Update()
+{
+	m_MoveTime -=(float)GameEngineTime::GetDelatTime();
+	m_FireTime -=(float)GameEngineTime::GetDelatTime();
+
+	if (0.0f >= m_MoveTime || 0.0f >= m_FireTime)
+	{
+		InputCheck();
+	}
 }

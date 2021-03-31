@@ -10,15 +10,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ConsoleHelper.cpp">
       <Filter>01.Content</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>02.Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h" />
     <ClInclude Include="ConsoleHelper.h">
       <Filter>01.Content</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>02.Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
